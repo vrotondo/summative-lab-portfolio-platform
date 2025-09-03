@@ -1,0 +1,201 @@
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem 3.5rem 1rem 1.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    background: var(--surface-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    color: var(--text-color);
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1), 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    background: var(--background-secondary);
+}
+
+.clear-search {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--border-color);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    transition: var(--transition);
+    font-weight: 700;
+}
+
+.clear-search:hover {
+    background: var(--error-color);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.clear-search:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* Search States */
+.search-bar.has-results .search-input {
+    border-color: var(--success-color);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.search-bar.no-results .search-input {
+    border-color: var(--warning-color);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+/* Loading State */
+.search-bar.loading::after {
+    content: '';
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.search-bar.loading .clear-search {
+    display: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Enhanced hover effects */
+.search-input:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background: var(--background-secondary);
+}
+
+/* Quick search suggestions (for future enhancement) */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-top: 0.5rem;
+    box-shadow: var(--box-shadow);
+    z-index: 100;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.search-bar.has-suggestions .search-suggestions {
+    display: block;
+}
+
+.suggestion-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.suggestion-item:hover {
+    background: var(--surface-color);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-bar {
+        max-width: none;
+        width: 100%;
+    }
+
+    .search-input {
+        padding: 0.875rem 3rem 0.875rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .clear-search {
+        width: 26px;
+        height: 26px;
+        right: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-input {
+        padding: 0.8rem 2.75rem 0.8rem 1rem;
+        font-size: 0.9rem;
+        border-radius: 20px;
+    }
+
+    .clear-search {
+        width: 24px;
+        height: 24px;
+        right: 8px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+
+    .search-input,
+    .clear-search {
+        transition: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .search-input {
+        border-width: 3px;
+    }
+
+    .search-input:focus {
+        outline: 2px solid var(--primary-color);
+    }
+}
